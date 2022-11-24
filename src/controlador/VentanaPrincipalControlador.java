@@ -32,6 +32,7 @@ public class VentanaPrincipalControlador {
         
         vista.setVisible(true);
         vista.setLocationRelativeTo(null);
+        vista.setTitle("Generador de amortizaciones");
         
         vista.addActionBtnCalcular(oyenteDeCalcular);
     }
@@ -43,10 +44,11 @@ public class VentanaPrincipalControlador {
             vista.limpiarTabla();
             
             try{            
-                monto = (int)Math.round(vista.getMonto());
+                monto = Integer.parseInt(vista.getMonto());
+                meses = Integer.parseInt(vista.getMeses());
 
                 modelo.setMonto(monto);
-                modelo.setMeses(vista.getMeses());
+                modelo.setMeses(meses);
                 modelo.definirTasa();
                 modelo.calcularCuota();
 

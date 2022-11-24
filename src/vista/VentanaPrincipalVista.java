@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  *    Autores: Juan David Loaiza Santiago <juan.loaiza.santiago@correounivalle.edu.co> - 2177570-3743
  *    Fecha creación: 11-22-2021
  *    Fecha última modificación: 11-24-2021
- *    Versión: 0.2
+ *    Versión: 0.3
  *    Licencia: GNU-GPL
  *    
 */
@@ -212,36 +212,70 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Crea los titulos de la tabla 
+     */
     public void configurarTabla(){
         String[] titulosTabla = new String[]{"Saldo Inicial", "Interes", "Cuota", "Abono", "SaldoFinal"};
         modeloTabla.setColumnIdentifiers(titulosTabla);
     }
     
-    public int getMonto() {
-        return Integer.parseInt(cmp_monto.getText());
+    /**
+     * @return cmp_monto El String que hay en el campo
+     */
+    public String getMonto() {
+        return cmp_monto.getText();
     }
-    public int getMeses() {
-        return Integer.parseInt(cmp_meses.getText());
+    
+    /**
+     * @return cmp_monto El String que hay en el campo
+     */
+    public String getMeses() {
+        return cmp_meses.getText();
     }
 
+    /**
+     * Convierte la tasa de interes en un String y la asigna al campo
+     * @param valor El valor porcentual decimal de la tasa de interes
+     */
     public void setTasa(double valor) {
         cmp_tasa.setText(String.valueOf(valor));
     }
     
+    /**
+     * Convierte la cuota en un String y la asigna al campo
+     * @param valor El valor de la cuota 
+     */
     public void setCuota(int valor) {
         cmp_cuota.setText(String.valueOf(valor));
     }
     
+    /**
+     * Convierte el interes en un String y lo asigna al campo
+     * @param valor La sumatoria de los intereses durante 
+     * todo el tiempo de amortización
+     */
     public void setTotalInteres(int valor) {
         cmp_totalInteres.setText(String.valueOf(valor));
     }
-   
+    
+    /**
+     * Crea una nueva fila con los datos de amortizacion del mes
+     * @param monto El saldo inicial
+     * @param interes El costo del interes
+     * @param cuota La cuota que se aplica
+     * @param abono El abono obtenido
+     * @param saldoFinal El saldo que queda
+     */   
     public void nuevaFilaTablaResultados(int monto, int interes, int cuota, int abono, int saldoFinal){
         modeloTabla.addRow(new Object[]{
             monto, interes, cuota, abono, saldoFinal
         });
     }
     
+    /**
+     * Elimina todas las filas de la tabla para dejarla vacia
+     */
     public void limpiarTabla(){
         int filasTabla = modeloTabla.getRowCount();
         for(int i = 0; i < filasTabla; i++){
@@ -249,6 +283,10 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Asigna un Listener para le boton de calcular
+     * @param listener El ActionListener para asignar a btn_calcular
+     */
     public void addActionBtnCalcular(ActionListener listener){
         btn_calcular.addActionListener(listener);
     }

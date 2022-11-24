@@ -9,7 +9,7 @@ package modelo;
  *    Autores: Juan David Loaiza Santiago <juan.loaiza.santiago@correounivalle.edu.co> - 2177570-3743
  *    Fecha creación: 11-22-2021
  *    Fecha última modificación: 11-24-2021
- *    Versión: 0.2
+ *    Versión: 0.3
  *    Licencia: GNU-GPL
  *    
 */
@@ -32,38 +32,68 @@ public class VentanaPrincipalModelo {
     public VentanaPrincipalModelo(){
     }
 
+    /** 
+     * Asgina un valor para el monto.
+     * @param _monto La cantidad de dinero con la que se cuenta.
+     */
     public void setMonto(int _monto) {
         monto = Double.valueOf(_monto);
     }
 
+    /**
+     * Asigna un valor para los meses.
+     * @param _meses La cantidad de meses en la que se hará la amortización.
+     */
     public void setMeses(int _meses) {
         meses = Double.valueOf(_meses);
     }
 
+    /**
+     * @return tasa Un numero flotante que representa el porcentaje de tasa de interes.
+     */
     public double getTasa() {
         return tasa;
     }
 
+    /**
+     * @return interes Un numero flotante que representa una cantidad de dinero.
+     */
     public double getInteres() {
         return interes;
     }
 
+    /**
+     * @return cuota Un numero flotante que representa una cantidad de dinero.
+     */
     public double getCuota() {
         return cuota;
     }
     
+    /**
+     * @return abono Un numero flotante que representa una cantidad de dinero.
+     */
     public double getAbono() {
         return abono;
     }
 
+    /**
+     * @return saldoFinal Un numero flotante que representa una cantidad de dinero.
+     */
     public double getSaldoFinal() {
         return saldoFinal;
     }
+    
+    /**
+     * @return Un numero flotante que representa una cantidad de dinero, en este caso la sumatoria de todos los "interes".
+     */
     public double getTotalInteres() {
         return totalInteres;
     }
     
-    
+    /**
+     * Define un porcentaje para la tasa de interes en bases a
+     * la cantidad del monto y los meses, modifica la variable "tasa".
+     */
     public void definirTasa(){
         if (monto < 1500000){
             if(meses < 12){
@@ -86,6 +116,10 @@ public class VentanaPrincipalModelo {
         }
     }
     
+    /**
+     * Define una cuota en base a una formula donde interviene la "tasa" y los "meses"
+     * Modifica el valor de la variable "cuota"
+     */
     public void calcularCuota(){
         double numerador = Math.pow((1+tasa),meses) * tasa;
         double denominador = Math.pow(1+tasa,meses) - 1;
@@ -93,27 +127,48 @@ public class VentanaPrincipalModelo {
         cuota = monto * numerador/denominador;  
     }
     
+    /**
+     * Genera el valor del interes y acumula el interes total
+     */
     public void calcularInteres(){
         interes = monto * tasa;
         totalInteres += interes;
     }
     
+    /**
+     * Calcula el abono en base a la cuota y los intereses
+     * Si el abono es mayor al monto entonces se igualará
+     */
     public void calcularAbono(){
         abono = cuota - interes;
         if(abono > monto){
             abono = monto;
         }
     }
+    
+    /**
+     * Calcula el saldo final en base al "monto" y el "abono"
+     */
     public void calcularSaldoFinal(){
         saldoFinal = monto - abono;
     }
     
+    
+    /**
+     * Anidacion de métodos, hace una llamada a otros metodos
+     * @see calcularInteres();
+     * @see calcularAbono();
+     * @see calcularSaldoFinal();
+     */
     public void calcularDatosTabla(){
         calcularInteres();
         calcularAbono();
         calcularSaldoFinal();
     }
     
+    /**
+     * Establece el valor de totalInteres en 0
+     */
     public void limpiarTotalInteres(){
         totalInteres = 0;
     }
