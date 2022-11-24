@@ -2,6 +2,7 @@
 package vista;
 
 import java.awt.event.ActionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *    Fundamentos de programación orientada a eventos 750014C-01 
@@ -10,8 +11,8 @@ import java.awt.event.ActionListener;
  *    Archivo: VentanaPrincipalVista.java
  *    Autores: Juan David Loaiza Santiago <juan.loaiza.santiago@correounivalle.edu.co> - 2177570-3743
  *    Fecha creación: 11-22-2021
- *    Fecha última modificación: 11-22-2021
- *    Versión: 0.1
+ *    Fecha última modificación: 11-24-2021
+ *    Versión: 0.2
  *    Licencia: GNU-GPL
  *    
 */
@@ -20,6 +21,8 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
     
     public VentanaPrincipalVista() {
         initComponents();
+        tabla_resultados.setModel(modeloTabla);
+        configurarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -36,17 +39,13 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         lbl_tasa = new javax.swing.JLabel();
         cmp_meses = new javax.swing.JTextField();
         lbl_cuota = new javax.swing.JLabel();
-        cmp_interes = new javax.swing.JTextField();
-        lbl_interes = new javax.swing.JLabel();
         lbl_datos = new javax.swing.JLabel();
         lbl_resultados = new javax.swing.JLabel();
         btn_calcular = new javax.swing.JButton();
-        cmp_cuota2 = new javax.swing.JTextField();
-        lbl_cuota2 = new javax.swing.JLabel();
-        lbl_abono = new javax.swing.JLabel();
-        cmp_abono = new javax.swing.JTextField();
-        cmp_saldoFinal = new javax.swing.JTextField();
-        lbl_saldoFinal = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla_resultados = new javax.swing.JTable();
+        lbl_totalInteres = new javax.swing.JLabel();
+        cmp_totalInteres = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -58,12 +57,12 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         lbl_monto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_monto.setForeground(new java.awt.Color(0, 0, 0));
         lbl_monto.setText("Monto");
-        jPanel1.add(lbl_monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 57, -1));
+        jPanel1.add(lbl_monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 57, -1));
 
         lbl_meses.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_meses.setForeground(new java.awt.Color(0, 0, 0));
         lbl_meses.setText("Meses");
-        jPanel1.add(lbl_meses, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 57, -1));
+        jPanel1.add(lbl_meses, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 57, -1));
 
         lbl_titulo.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lbl_titulo.setForeground(new java.awt.Color(0, 102, 102));
@@ -79,7 +78,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         cmp_cuota.setText("0");
         cmp_cuota.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cmp_cuota.setOpaque(true);
-        jPanel1.add(cmp_cuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 80, -1));
+        jPanel1.add(cmp_cuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 80, -1));
 
         cmp_monto.setBackground(new java.awt.Color(255, 255, 255));
         cmp_monto.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -88,7 +87,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         cmp_monto.setText("0");
         cmp_monto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cmp_monto.setOpaque(true);
-        jPanel1.add(cmp_monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 130, 20));
+        jPanel1.add(cmp_monto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 130, 20));
 
         cmp_tasa.setEditable(false);
         cmp_tasa.setBackground(new java.awt.Color(204, 204, 204));
@@ -98,12 +97,12 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         cmp_tasa.setText("0");
         cmp_tasa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cmp_tasa.setOpaque(true);
-        jPanel1.add(cmp_tasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 80, -1));
+        jPanel1.add(cmp_tasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 80, -1));
 
         lbl_tasa.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_tasa.setForeground(new java.awt.Color(0, 0, 0));
         lbl_tasa.setText("Tasa Interes");
-        jPanel1.add(lbl_tasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, 90, -1));
+        jPanel1.add(lbl_tasa, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 90, -1));
 
         cmp_meses.setBackground(new java.awt.Color(255, 255, 255));
         cmp_meses.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -112,103 +111,73 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         cmp_meses.setText("0");
         cmp_meses.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         cmp_meses.setOpaque(true);
-        jPanel1.add(cmp_meses, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 60, 20));
+        jPanel1.add(cmp_meses, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, 60, 20));
 
         lbl_cuota.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_cuota.setForeground(new java.awt.Color(0, 0, 0));
         lbl_cuota.setText("Cuota");
-        jPanel1.add(lbl_cuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 50, -1));
-
-        cmp_interes.setEditable(false);
-        cmp_interes.setBackground(new java.awt.Color(255, 255, 255));
-        cmp_interes.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        cmp_interes.setForeground(new java.awt.Color(0, 0, 0));
-        cmp_interes.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cmp_interes.setText("0");
-        cmp_interes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cmp_interes.setOpaque(true);
-        jPanel1.add(cmp_interes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 90, 20));
-
-        lbl_interes.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_interes.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_interes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_interes.setText("Interes");
-        lbl_interes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lbl_interes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 90, 20));
+        jPanel1.add(lbl_cuota, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 50, -1));
 
         lbl_datos.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_datos.setForeground(new java.awt.Color(0, 102, 102));
         lbl_datos.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_datos.setText("DATOS");
-        jPanel1.add(lbl_datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 70, -1));
+        jPanel1.add(lbl_datos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 70, -1));
 
         lbl_resultados.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_resultados.setForeground(new java.awt.Color(0, 102, 102));
         lbl_resultados.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbl_resultados.setText("RESULTADO");
-        jPanel1.add(lbl_resultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 140, 20));
+        jPanel1.add(lbl_resultados, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, 20));
 
         btn_calcular.setBackground(new java.awt.Color(0, 102, 102));
         btn_calcular.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_calcular.setForeground(new java.awt.Color(255, 255, 255));
         btn_calcular.setText("Calcular");
-        jPanel1.add(btn_calcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, -1));
+        jPanel1.add(btn_calcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 150, -1, -1));
 
-        cmp_cuota2.setEditable(false);
-        cmp_cuota2.setBackground(new java.awt.Color(255, 255, 255));
-        cmp_cuota2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        cmp_cuota2.setForeground(new java.awt.Color(0, 0, 0));
-        cmp_cuota2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cmp_cuota2.setText("0");
-        cmp_cuota2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cmp_cuota2.setOpaque(true);
-        jPanel1.add(cmp_cuota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 90, 20));
+        tabla_resultados.setBackground(new java.awt.Color(255, 255, 255));
+        tabla_resultados.setForeground(new java.awt.Color(0, 0, 0));
+        tabla_resultados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        lbl_cuota2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_cuota2.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_cuota2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_cuota2.setText("Cuota");
-        lbl_cuota2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lbl_cuota2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 90, 20));
+            },
+            new String [] {
 
-        lbl_abono.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_abono.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_abono.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_abono.setText("Abono");
-        lbl_abono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lbl_abono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 90, 20));
+            }
+        ));
+        jScrollPane1.setViewportView(tabla_resultados);
 
-        cmp_abono.setEditable(false);
-        cmp_abono.setBackground(new java.awt.Color(255, 255, 255));
-        cmp_abono.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        cmp_abono.setForeground(new java.awt.Color(0, 0, 0));
-        cmp_abono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cmp_abono.setText("0");
-        cmp_abono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cmp_abono.setOpaque(true);
-        jPanel1.add(cmp_abono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 90, 20));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 400, 120));
 
-        cmp_saldoFinal.setEditable(false);
-        cmp_saldoFinal.setBackground(new java.awt.Color(255, 255, 255));
-        cmp_saldoFinal.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        cmp_saldoFinal.setForeground(new java.awt.Color(0, 0, 0));
-        cmp_saldoFinal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cmp_saldoFinal.setText("0");
-        cmp_saldoFinal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        cmp_saldoFinal.setOpaque(true);
-        jPanel1.add(cmp_saldoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 90, 20));
+        lbl_totalInteres.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lbl_totalInteres.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_totalInteres.setText("Total de interes pagado: ");
+        jPanel1.add(lbl_totalInteres, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 180, -1));
 
-        lbl_saldoFinal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        lbl_saldoFinal.setForeground(new java.awt.Color(0, 0, 0));
-        lbl_saldoFinal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_saldoFinal.setText("Saldo Final");
-        lbl_saldoFinal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(lbl_saldoFinal, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, 90, 20));
+        cmp_totalInteres.setEditable(false);
+        cmp_totalInteres.setBackground(new java.awt.Color(204, 204, 204));
+        cmp_totalInteres.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        cmp_totalInteres.setForeground(new java.awt.Color(0, 0, 0));
+        cmp_totalInteres.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        cmp_totalInteres.setText("0");
+        cmp_totalInteres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cmp_totalInteres.setOpaque(true);
+        cmp_totalInteres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmp_totalInteresActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmp_totalInteres, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 110, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 360));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 450, 380));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmp_totalInteresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmp_totalInteresActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmp_totalInteresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,6 +212,11 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
         });
     }
 
+    public void configurarTabla(){
+        String[] titulosTabla = new String[]{"Saldo Inicial", "Interes", "Cuota", "Abono", "SaldoFinal"};
+        modeloTabla.setColumnIdentifiers(titulosTabla);
+    }
+    
     public int getMonto() {
         return Integer.parseInt(cmp_monto.getText());
     }
@@ -253,48 +227,51 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
     public void setTasa(double valor) {
         cmp_tasa.setText(String.valueOf(valor));
     }
+    
     public void setCuota(int valor) {
         cmp_cuota.setText(String.valueOf(valor));
     }
     
-    public void setInteres(int valor) {
-        cmp_interes.setText(String.valueOf(valor));
-    }
-    public void setCuota2(int valor) {
-        cmp_cuota2.setText(String.valueOf(valor));
-    }
-    public void setAbono(int valor) {
-        cmp_abono.setText(String.valueOf(valor));
-    }
-    public void setSaldoFinal(int valor) {
-        cmp_saldoFinal.setText(String.valueOf(valor));
+    public void setTotalInteres(int valor) {
+        cmp_totalInteres.setText(String.valueOf(valor));
     }
    
+    public void nuevaFilaTablaResultados(int monto, int interes, int cuota, int abono, int saldoFinal){
+        modeloTabla.addRow(new Object[]{
+            monto, interes, cuota, abono, saldoFinal
+        });
+    }
+    
+    public void limpiarTabla(){
+        int filasTabla = modeloTabla.getRowCount();
+        for(int i = 0; i < filasTabla; i++){
+            modeloTabla.removeRow(0);
+        }
+    }
+    
     public void addActionBtnCalcular(ActionListener listener){
         btn_calcular.addActionListener(listener);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_calcular;
-    private javax.swing.JTextField cmp_abono;
     private javax.swing.JTextField cmp_cuota;
-    private javax.swing.JTextField cmp_cuota2;
-    private javax.swing.JTextField cmp_interes;
     private javax.swing.JTextField cmp_meses;
     private javax.swing.JTextField cmp_monto;
-    private javax.swing.JTextField cmp_saldoFinal;
     private javax.swing.JTextField cmp_tasa;
+    private javax.swing.JTextField cmp_totalInteres;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lbl_abono;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_cuota;
-    private javax.swing.JLabel lbl_cuota2;
     private javax.swing.JLabel lbl_datos;
-    private javax.swing.JLabel lbl_interes;
     private javax.swing.JLabel lbl_meses;
     private javax.swing.JLabel lbl_monto;
     private javax.swing.JLabel lbl_resultados;
-    private javax.swing.JLabel lbl_saldoFinal;
     private javax.swing.JLabel lbl_tasa;
     private javax.swing.JLabel lbl_titulo;
+    private javax.swing.JLabel lbl_totalInteres;
+    private javax.swing.JTable tabla_resultados;
     // End of variables declaration//GEN-END:variables
+    
+    DefaultTableModel modeloTabla = new DefaultTableModel();    
 }
