@@ -8,24 +8,26 @@ package modelo;
  *    Archivo: VentanaPrincipalModelo.java
  *    Autores: Juan David Loaiza Santiago <juan.loaiza.santiago@correounivalle.edu.co> - 2177570-3743
  *    Fecha creación: 11-22-2021
- *    Fecha última modificación: 11-22-2021
- *    Versión: 0.1
+ *    Fecha última modificación: 11-24-2021
+ *    Versión: 0.2
  *    Licencia: GNU-GPL
  *    
 */
 
 public class VentanaPrincipalModelo {
     //  Recibe
-    double monto;
-    double meses;
+    private double monto;
+    private double meses;
     
     // Produce
-    double tasa;
-    double cuota;
+    private double tasa;
+    private double cuota;
     
-    double interes;
-    double abono;
-    double saldoFinal;
+    private double interes;
+    private double abono;
+    private double saldoFinal;
+    
+    private double totalInteres = 0;
     
     public VentanaPrincipalModelo(){
     }
@@ -57,6 +59,10 @@ public class VentanaPrincipalModelo {
     public double getSaldoFinal() {
         return saldoFinal;
     }
+    public double getTotalInteres() {
+        return totalInteres;
+    }
+    
     
     public void definirTasa(){
         if (monto < 1500000){
@@ -89,9 +95,14 @@ public class VentanaPrincipalModelo {
     
     public void calcularInteres(){
         interes = monto * tasa;
+        totalInteres += interes;
     }
+    
     public void calcularAbono(){
         abono = cuota - interes;
+        if(abono > monto){
+            abono = monto;
+        }
     }
     public void calcularSaldoFinal(){
         saldoFinal = monto - abono;
@@ -101,5 +112,9 @@ public class VentanaPrincipalModelo {
         calcularInteres();
         calcularAbono();
         calcularSaldoFinal();
+    }
+    
+    public void limpiarTotalInteres(){
+        totalInteres = 0;
     }
 }
