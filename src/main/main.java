@@ -2,8 +2,7 @@
 package main;
 
 /**
- *    Fundamentos de programación orientada a eventos 750014C-01  
- *    LABORATORIO 1   
+ *    Fundamentos de programación orientada a eventos 750014C-01 
  *    Profesor: Luis Romo Portilla
  *
  *    Archivo: main.java

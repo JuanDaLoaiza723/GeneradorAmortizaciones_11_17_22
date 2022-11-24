@@ -3,7 +3,6 @@ package controlador;
 
 /**
  *    Fundamentos de programación orientada a eventos 750014C-01  
- *    LABORATORIO 1   
  *    Profesor: Luis Romo Portilla
  *
  *    Archivo: VentanaPrincipalControlador.java
