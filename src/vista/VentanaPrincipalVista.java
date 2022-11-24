@@ -8,12 +8,11 @@ import javax.swing.table.DefaultTableModel;
  *    Fundamentos de programación orientada a eventos 750014C-01 
  *    Profesor: Luis Romo Portilla
  *
- *    Archivo: VentanaPrincipalVista.java
- *    Autores: Juan David Loaiza Santiago <juan.loaiza.santiago@correounivalle.edu.co> - 2177570-3743
- *    Fecha creación: 11-22-2021
- *    Fecha última modificación: 11-24-2021
- *    Versión: 0.3
+ *    Archivo: VentanaPrincipalVista.java;
  *    Licencia: GNU-GPL
+ * 
+ *    @version 0.3
+ *    @author Juan David Loaiza Santiago (2177570 - 3743) {@literal <"juan.loaiza.santiago@correounivalle.edu.co">}
  *    
 */
 
@@ -221,6 +220,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
     }
     
     /**
+     * Obtiene el contenido del campo monto
      * @return cmp_monto El String que hay en el campo
      */
     public String getMonto() {
@@ -228,6 +228,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
     }
     
     /**
+     * Obtiene el contenido del campo meses
      * @return cmp_monto El String que hay en el campo
      */
     public String getMeses() {

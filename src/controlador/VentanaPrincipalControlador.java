@@ -2,16 +2,15 @@
 package controlador;
 
 /**
- *    Fundamentos de programación orientada a eventos 750014C-01  
- *    Profesor: Luis Romo Portilla
+ *    Fundamentos de programación orientada a eventos 750014C-01 
+ *    Profesor: Luis Romo Portilla 
  *
- *    Archivo: VentanaPrincipalControlador.java
- *    Autores: Juan David Loaiza Santiago <juan.loaiza.santiago@correounivalle.edu.co> - 2177570-3743
- *    Fecha creación: 11-22-2021
- *    Fecha última modificación: 11-24-2021
- *    Versión: 1.2
- *    Licencia: GNU-GPL
- *    
+ *    Archivo: VentanaPrincipalControlador.java 
+ *    Licencia: GNU-GPL 
+ * 
+ *    @version 1.2
+ *    @author Juan David Loaiza Santiago (2177570 - 3743) {@literal <"juan.loaiza.santiago@correounivalle.edu.co">}
+ * 
 */
 
 import java.awt.event.ActionEvent;
@@ -64,6 +63,9 @@ public class VentanaPrincipalControlador {
         }
     };
     
+    /**
+     * Comunica al modelo con la vista para generar los distintos valores de la tabla en un mes
+     */
     public void calcularNuevaFila(){
         modelo.setMonto(monto);
         modelo.calcularDatosTabla();

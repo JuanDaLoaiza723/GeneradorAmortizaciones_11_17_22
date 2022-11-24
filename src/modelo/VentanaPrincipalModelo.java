@@ -6,12 +6,10 @@ package modelo;
  *    Profesor: Luis Romo Portilla
  *
  *    Archivo: VentanaPrincipalModelo.java
- *    Autores: Juan David Loaiza Santiago <juan.loaiza.santiago@correounivalle.edu.co> - 2177570-3743
- *    Fecha creación: 11-22-2021
- *    Fecha última modificación: 11-24-2021
- *    Versión: 0.3
  *    Licencia: GNU-GPL
- *    
+ * 
+ *    @version 0.3
+ *    @author Juan David Loaiza Santiago (2177570 - 3743) {@literal <"juan.loaiza.santiago@correounivalle.edu.co">}
 */
 
 public class VentanaPrincipalModelo {
@@ -49,6 +47,7 @@ public class VentanaPrincipalModelo {
     }
 
     /**
+     * Obtiene el porcentaje de la tasa
      * @return tasa Un numero flotante que representa el porcentaje de tasa de interes.
      */
     public double getTasa() {
@@ -56,6 +55,7 @@ public class VentanaPrincipalModelo {
     }
 
     /**
+     * Obtiene el costo del interes
      * @return interes Un numero flotante que representa una cantidad de dinero.
      */
     public double getInteres() {
@@ -63,6 +63,7 @@ public class VentanaPrincipalModelo {
     }
 
     /**
+     * Obtiene el costo de la cuota
      * @return cuota Un numero flotante que representa una cantidad de dinero.
      */
     public double getCuota() {
@@ -70,6 +71,7 @@ public class VentanaPrincipalModelo {
     }
     
     /**
+     * Obtiene la cantidad que hay que abonar
      * @return abono Un numero flotante que representa una cantidad de dinero.
      */
     public double getAbono() {
@@ -77,13 +79,15 @@ public class VentanaPrincipalModelo {
     }
 
     /**
-     * @return saldoFinal Un numero flotante que representa una cantidad de dinero.
+     * Obtiene el saldo que queda
+     * @return saldoFinal Un numero flotante (double) que representa una cantidad de dinero.
      */
     public double getSaldoFinal() {
         return saldoFinal;
     }
     
     /**
+     * Obtiene el total de interes que se paga en todo el tiempo de amortizacion
      * @return Un numero flotante que representa una cantidad de dinero, en este caso la sumatoria de todos los "interes".
      */
     public double getTotalInteres() {
@@ -156,9 +160,9 @@ public class VentanaPrincipalModelo {
     
     /**
      * Anidacion de métodos, hace una llamada a otros metodos
-     * @see calcularInteres();
-     * @see calcularAbono();
-     * @see calcularSaldoFinal();
+     * @see calcularInteres Método al que llama
+     * @see calcularAbono Método al que llama
+     * @see calcularSaldoFinal Método al que llama
      */
     public void calcularDatosTabla(){
         calcularInteres();
