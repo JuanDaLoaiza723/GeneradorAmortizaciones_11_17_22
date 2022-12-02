@@ -13,10 +13,11 @@ package modelo;
 */
 
 public class VentanaPrincipalModelo {
-    
+    //  Recibe
     private double monto;
     private double meses;
-
+    
+    // Produce
     private double tasa;
     private double cuota;
     
@@ -29,14 +30,12 @@ public class VentanaPrincipalModelo {
     public VentanaPrincipalModelo(){
     }
 
-    /**
-     * Asigna un valor para el monto inicial.
-     * @param _monto La cantidad de dinero
-     * @return 
+    /** 
+     * Asgina un valor para el monto.
+     * @param _monto La cantidad de dinero con la que se cuenta.
      */
-    public int setMonto(int _monto) {
+    public void setMonto(int _monto) {
         monto = Double.valueOf(_monto);
-        return _monto;
     }
 
     /**
