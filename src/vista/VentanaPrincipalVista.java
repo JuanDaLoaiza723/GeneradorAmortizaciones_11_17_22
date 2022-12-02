@@ -17,13 +17,14 @@ import javax.swing.table.DefaultTableModel;
 */
 
 public class VentanaPrincipalVista extends javax.swing.JFrame {
-    
+
     public VentanaPrincipalVista() {
         initComponents();
         tabla_resultados.setModel(modeloTabla);
         configurarTabla();
+        
     }
-
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -312,5 +313,7 @@ public class VentanaPrincipalVista extends javax.swing.JFrame {
     private javax.swing.JTable tabla_resultados;
     // End of variables declaration//GEN-END:variables
     
-    DefaultTableModel modeloTabla = new DefaultTableModel();    
+    DefaultTableModel modeloTabla = new DefaultTableModel();
 }
+
+
